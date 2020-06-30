@@ -82,7 +82,8 @@
 .country-data-table {
   width: 100%;
   overflow: hidden;
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .tableCountry {
