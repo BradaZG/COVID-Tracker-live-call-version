@@ -10,14 +10,23 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="new-style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
-    <script src="map-style.js"></script>
-    <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c939d0e917.js"
+      SameSite="None"
+    ></script>
   </head>
   <body>
     <div class="container-fluid main">
@@ -48,15 +57,15 @@
           <div class="row stats-container">
             <div class="col">
               <div
-                class="card"
+                class="card active"
                 id="total-cases-card"
-                onclick="getCountryData('total')"
+                onclick="getCountryData('total'); makeActive(this)"
               >
                 <div class="card-body">
                   <h5 class="card-title">Total Cases</h5>
                   <h6
                     id="total-cases"
-                    class="card-subtitle mb-2 text-muted"
+                    class="card-subtitle mb-2 total-number"
                   ></h6>
                 </div>
               </div>
@@ -65,13 +74,13 @@
               <div
                 class="card"
                 id="active-cases-card"
-                onclick="getCountryData('active')"
+                onclick="getCountryData('active'); makeActive(this)"
               >
                 <div class="card-body">
                   <h5 class="card-title">Active Cases</h5>
                   <h6
                     id="active-cases"
-                    class="card-subtitle mb-2 text-muted"
+                    class="card-subtitle mb-2 active-number"
                   ></h6>
                 </div>
               </div>
@@ -80,13 +89,13 @@
               <div
                 class="card"
                 id="recovered-card"
-                onclick="getCountryData('recovered')"
+                onclick="getCountryData('recovered'); makeActive(this)"
               >
                 <div class="card-body">
                   <h5 class="card-title">Recovered</h5>
                   <h6
                     id="total-recoveries"
-                    class="card-subtitle mb-2 text-muted"
+                    class="card-subtitle mb-2 recovered-number"
                   ></h6>
                 </div>
               </div>
@@ -95,13 +104,13 @@
               <div
                 class="card"
                 id="deaths-card"
-                onclick="getCountryData('deaths')"
+                onclick="getCountryData('deaths'); makeActive(this)"
               >
                 <div class="card-body">
                   <h5 class="card-title">Deaths</h5>
                   <h6
                     id="total-deaths"
-                    class="card-subtitle mb-2 text-muted"
+                    class="card-subtitle mb-2 deaths-number"
                   ></h6>
                 </div>
               </div>
@@ -112,16 +121,24 @@
               <div id="map"></div>
             </div>
           </div>
-          <div class="row chart-container mt-3">
-            <div class="col-6 linear-chart mr-3">
+          <div class="row chart-container my-3">
+            <div class="col-6 linear-chart">
               <canvas id="myChart"></canvas>
             </div>
-            <div class="col-5 pie-chart mr-3">
+            <div class="col-6 pie-chart">
               <canvas id="pieChart"></canvas>
             </div>
           </div>
         </div>
-        <div class="col-4"></div>
+        <div class="col-4 side-panel-container my-3">
+          <div class="country-data-table my-custom-scrollbar">
+            <table
+              id="table"
+              class="table-hover display table table-striped table-bordered"
+              width="100%"
+            ></table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -135,6 +152,7 @@
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -145,5 +163,9 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <script src="map-style.js"></script>
+    <script src="chart.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

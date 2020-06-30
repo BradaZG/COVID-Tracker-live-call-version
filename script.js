@@ -1,5 +1,6 @@
 let map;
 let circles = [];
+let circleColor = "#1d2c4d";
 
 window.onload = () => {
   getCountryData();
@@ -55,6 +56,7 @@ const getCountryData = (rad = "total") => {
     })
     .then((data) => {
       showDataOnMap(data, rad);
+      showDataInTable(data);
     });
 };
 
@@ -66,145 +68,6 @@ const getHistoricalData = () => {
     .then((data) => {
       buildChart(data);
     });
-};
-
-const buildPieChart = (data) => {
-  var ctx = document.getElementById("pieChart").getContext("2d");
-
-  let myChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      datasets: [
-        {
-          data: [data.cases, data.active, data.recovered, data.deaths],
-          backgroundColor: [
-            "rgb(29, 44, 77)",
-            "rgb(252, 60, 60)",
-            "yellow",
-            "rgb(0, 0, 255)",
-          ],
-        },
-      ],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: ["Total Cases", "Active Cases", "Recovered", "Deaths"],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      aspectRatio: 1,
-      legend: {
-        onHover: function (e) {
-          e.target.style.cursor = "pointer";
-        },
-      },
-      tooltips: {
-        mode: "index",
-        intersect: true,
-        callbacks: {
-          label: function (tooltipItem, data) {
-            let label = data.labels[tooltipItem.index] || "";
-            let value =
-              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            return label + ": " + numeral(value).format("0,0");
-          },
-        },
-      },
-    },
-  });
-};
-
-const buildChart = (chartData) => {
-  let totCases = Object.values(chartData.cases);
-  let arrDates = Object.keys(chartData.cases);
-
-  var timeFormat = "MM/DD/YY";
-  var ctx = document.getElementById("myChart").getContext("2d");
-
-  let myChart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: "line",
-
-    // The data for our dataset
-    data: {
-      labels: [...arrDates],
-      datasets: [
-        {
-          label: "Total Cases",
-          backgroundColor: "rgba(29, 44, 77, 0.8)",
-          borderColor: "rgba(29, 44, 77, 0.9)",
-          data: [...totCases],
-          fill: true,
-          borderWidth: 2,
-        },
-      ],
-    },
-
-    // Configuration options go here
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      aspectRatio: 2,
-      title: {
-        display: true,
-        text: "Global Stats",
-      },
-      tooltips: {
-        mode: "index",
-        intersect: true,
-        callbacks: {
-          label: function (tooltipItem, data) {
-            let label = data.datasets[tooltipItem.datasetIndex].label || "";
-            let value =
-              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            return label + ": " + numeral(value).format("0,0");
-          },
-        },
-      },
-      legend: {
-        onHover: function (e) {
-          e.target.style.cursor = "pointer";
-        },
-      },
-      hover: {
-        onHover: function (e) {
-          let point = this.getElementAtEvent(e);
-          if (point.length) e.target.style.cursor = "pointer";
-          else e.target.style.cursor = "default";
-        },
-      },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: "Month",
-            },
-            type: "time",
-            time: {
-              parser: timeFormat,
-              tooltipFormat: "ll",
-            },
-          },
-        ],
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: "Value",
-            },
-            ticks: {
-              callback: function (value) {
-                return numeral(value).format("0,0");
-              },
-            },
-          },
-        ],
-      },
-    },
-  });
 };
 
 const openInfoWindow = () => {
@@ -235,21 +98,25 @@ const showDataOnMap = (data, rad) => {
       let radius = 0;
       if (rad === "total") {
         radius = country.cases;
+        circleColor = "#1d2c4d";
       } else if (rad === "active") {
         radius = country.active;
+        circleColor = "#9d80fe";
       } else if (rad === "recovered") {
         radius = country.recovered;
+        circleColor = "#7dd71d";
       } else if (rad === "deaths") {
         radius = country.deaths;
+        circleColor = "#fb4443";
       }
       return radius;
     };
 
-    countryCircle = new google.maps.Circle({
-      strokeColor: "#FF0000",
+    let countryCircle = new google.maps.Circle({
+      strokeColor: circleColor,
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: "#FF0000",
+      fillColor: circleColor,
       fillOpacity: 0.35,
       center: countryCenter,
       radius: setRadius(),
@@ -294,4 +161,38 @@ const showDataOnMap = (data, rad) => {
       infoWindow.close();
     });
   });
+};
+
+const showDataInTable = (data) => {
+  let dataSet = [];
+
+  data.forEach((country) => {
+    dataSet.push([
+      country.country,
+      numeral(country.cases).format("0,0"),
+      numeral(country.recovered).format("0,0"),
+      numeral(country.deaths).format("0,0"),
+    ]);
+  });
+
+  $("#table").DataTable({
+    retrieve: true,
+    pageLength: 17,
+    data: dataSet,
+    columns: [
+      { title: "Country Name" },
+      { title: "Cases" },
+      { title: "Recovered" },
+      { title: "Deaths" },
+    ],
+  });
+};
+
+const makeActive = (elem) => {
+  let cards = document.getElementsByClassName("card");
+
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].classList.remove("active");
+  }
+  elem.classList.add("active");
 };
