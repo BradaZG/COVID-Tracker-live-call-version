@@ -11,7 +11,6 @@ const buildChartData = (data) => {
 };
 
 const buildChart = (chartData) => {
-  console.log(chartData);
   var timeFormat = "MM/DD/YY";
   var ctx = document.getElementById("myChart").getContext("2d");
   var chart = new Chart(ctx, {

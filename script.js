@@ -234,7 +234,7 @@ const showDataOnMap = (data, casesType = "cases") => {
 };
 
 const showDataInTable = (data) => {
-  var html = "";
+  let html = "";
   data.forEach((country) => {
     html += `
         <tr>
