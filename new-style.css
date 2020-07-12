@@ -1,0 +1,327 @@
+body {
+  background-color: #f5f6fa;
+}
+
+.main {
+  height: 100vh;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.map-container {
+  height: 78vh;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+}
+
+.map-outer-container {
+  width: 100%;
+}
+
+.header-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#map {
+  border-radius: 12px;
+  height: 88%;
+}
+
+#map-title,
+#updated {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.map-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#copy {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  color: lightgray;
+}
+
+.chart-container {
+  margin-left: 0;
+  margin-right: 0;
+  height: 25vh;
+}
+
+.chart-container .col {
+  background-color: #eff2f6;
+  border-radius: 12px;
+}
+
+.linear-chart {
+  height: 100%;
+}
+
+.title-container h2 {
+  color: #fc3c3c;
+  margin-bottom: 0;
+}
+
+.title-container h4 {
+  text-transform: uppercase;
+  color: #cacbcf;
+}
+
+.stats-container .card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.stats-container .card-body {
+  padding: 1rem;
+  margin-top: 10px;
+}
+
+.stats-container .card-title,
+#map-title,
+#updated,
+#updated-date {
+  color: #695d5c;
+  font-weight: 400;
+}
+
+.stats-container .card-subtitle {
+  font-weight: 600;
+}
+
+.stats-container .total {
+  font-size: 0.8rem;
+}
+
+.side-panel-container {
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  background-color: white;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+  padding-top: 15px;
+}
+
+.total-number {
+  color: #cc1034;
+}
+
+.recovered-number {
+  color: #7fd922;
+}
+
+.deaths-number {
+  color: #fa5575;
+}
+
+.table td,
+.table th {
+  border-top: none;
+}
+
+.cases-table-container {
+  height: 66vh;
+}
+
+.cases-table-container h4 {
+  margin-top: 5px;
+}
+
+.cases-table-container h4,
+.chart-container h4 {
+  color: #6a5d5d;
+  font-weight: 400;
+}
+
+.country-data .table td {
+  padding: 0.5rem;
+  border: none;
+}
+
+.my-custom-scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.tab-selection {
+  height: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.stats-container .cases:hover .tab-selection {
+  background-color: #cc1034;
+}
+
+.stats-container .recovered:hover .tab-selection {
+  background-color: #7fd922;
+}
+
+.stats-container .deaths:hover .tab-selection {
+  background-color: #fa5575;
+}
+
+.cases.active .tab-selection {
+  background-color: #cc1034;
+}
+
+.recovered.active .tab-selection {
+  background-color: #7fd922;
+}
+
+.deaths.active .tab-selection {
+  background-color: #fa5575;
+}
+
+#map-title {
+  font-size: 1.3rem;
+}
+
+#updated {
+  font-size: 1rem;
+}
+
+table thead th {
+  font-size: 1em;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  #map {
+    height: 88%;
+  }
+
+  .map-container {
+    height: 73vh;
+  }
+
+  table thead th {
+    font-size: 0.7em;
+  }
+
+  .cases-table-container {
+    height: 66vh;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 0.8em;
+  }
+}
+
+@media (min-width: 411px) and (max-width: 767px) {
+  #map {
+    height: 82%;
+  }
+
+  .map-container {
+    height: 78vh;
+  }
+
+  table thead th {
+    font-size: 0.7em;
+  }
+
+  .cases-table-container {
+    height: 67vh;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 0.8em;
+  }
+
+  .side-panel-container {
+    border-radius: 12px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .chart-container {
+    height: 35vh;
+    padding-bottom: 10px;
+  }
+
+  #map-title {
+    font-size: 1rem;
+  }
+
+  #updated {
+    font-size: 0.7rem;
+  }
+
+  .cases-table-container h4,
+  .chart-container h4 {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 410px) {
+  #map {
+    height: 81%;
+  }
+
+  .map-container {
+    height: 79vh;
+  }
+
+  table thead th {
+    font-size: 0.7em;
+  }
+
+  .cases-table-container {
+    height: 67vh;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 0.8em;
+  }
+
+  .side-panel-container {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 92%;
+  }
+
+  .chart-container {
+    height: 35vh;
+    padding-bottom: 10px;
+  }
+
+  #map-title {
+    font-size: 0.9rem;
+  }
+
+  #updated {
+    font-size: 0.6rem;
+  }
+
+  .cases-table-container h4,
+  .chart-container h4 {
+    font-size: 1em;
+  }
+
+  .title-container h2 {
+    font-size: 1.5em;
+  }
+}

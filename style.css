@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+}
+
+#nav {
+  height: 50px;
+}
+
+.chart-data {
+  width: 30%;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.map-info {
+  background-color: bisque;
+  height: 400px;
+}
+
+.data-info {
+  height: 700px;
+  display: flex;
+  justify-content: center;
+}
+
+.country-data {
+  margin-top: 20px;
+  overflow: scroll;
+  height: 91%;
+}
+
+.country-data thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 45px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.info-flag img {
+  width: 100px;
+  border-radius: 5px;
+}
+
+.info-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+.info-container {
+  width: 150px;
+}
+
+.info-flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 8px;
+}
+
+.info-confirmed,
+.info-recovered,
+.info-deaths {
+  font-size: 16px;
+  margin-top: 5px;
+}
